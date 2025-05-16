@@ -5,10 +5,13 @@ import java.util.*;
 import shop.ClothingItem;
 import shop.Inventory;
 import sales.SalesRegister;
+import sales.ShoppingRegister;
 
 import test.TestClothingItem;
 import test.TestInventory;
+import test.TestLinkedCart;
 import test.TestSalesRegister;
+import test.TestShoppingRegister;
 
 public class Main {
 	static Scanner sc = new Scanner(System.in);
@@ -37,16 +40,28 @@ public class Main {
     				salesStats();
     				break;
     			case 5:
-    				System.out.println("Adios!");
+    				addToCart();
     				break;
     			case 6:
+    				removeFromCart();
+    				break;
+    			case 7:
+    				confirmCart();
+    				break;
+    			case 8:
+    				showCart();
+    				break;
+    			case 9:
+    				System.out.println("Adios!");
+    				break;
+    			case 0:
     				testing();
     				break;
     			default:
     				System.out.println("Opción no valida.");
     				break;
     		}
-    	} while (option != 5);
+    	} while (option != 9);
 
         
     }
@@ -58,8 +73,12 @@ public class Main {
     			+ "2. Mostrar inventario\n"
     			+ "3. Procesar venta\n"
     			+ "4. Mostrar estadísticas de ventas\n"
-    			+ "5. Salir\n"
-    			+ "Seleccione una opción (1-5):";
+    			+ "5. Agregar prenda al carrito\n"
+    			+ "6. Eliminar prenda del carrito\n"
+    			+ "7. Confirmar carrito de compra\n"
+    			+ "8. Mostrar productos del carrito\n"
+    			+ "9. Salir\ns"
+    			+ "Seleccione una opción (1-9):";
     	int input = -1;
     	
     	System.out.print(menuStr);
@@ -72,7 +91,7 @@ public class Main {
     	};
     	
     	
-    	if (input >= 1 && input <= 6) {
+    	if (input >= 0 && input <= 9) {
     		return input;
     	} 
     	
@@ -120,6 +139,50 @@ public class Main {
     	System.out.println(SalesRegister.getBalance());
     }
     
+    public static void addToCart() {
+    	System.out.print("\nIntroduce los detalles de la prenda a añadir al carrito:\nNombre: ");
+    	String name = sc.next();
+    	char talla = ' ';
+    	int unidades = 0;
+    	
+    	do {
+    		System.out.print("Talla (S/M/L): ");
+        	talla = sc.next().strip().toUpperCase().charAt(0);
+        	System.out.println("");
+    	} while (talla != 'S' && talla != 'M' && talla != 'L');
+    	
+    	System.out.print("Unidades: ");
+    	unidades = sc.nextInt();
+    	
+    	ShoppingRegister.addToCart(inv, name, talla, unidades);
+    }
+    
+    public static void removeFromCart() {
+    	System.out.print("\nIntroduce los detalles de la prenda a quitar del carrito:\nNombre: ");
+    	String name = sc.next();
+    	char talla = ' ';
+    	int unidades = 0;
+    	
+    	do {
+    		System.out.print("Talla (S/M/L): ");
+        	talla = sc.next().strip().toUpperCase().charAt(0);
+        	System.out.println("");
+    	} while (talla != 'S' && talla != 'M' && talla != 'L');
+    	
+    	System.out.print("Unidades: ");
+    	unidades = sc.nextInt();
+    	
+    	ShoppingRegister.removeFromCart(inv, name, talla, unidades);
+    }
+    
+    public static void confirmCart() {
+    	ShoppingRegister.confirmCart(inv);
+    }
+    
+    public static void showCart() {
+    	ShoppingRegister.showCart();
+    }
+    
     public static void testing() {
     	ClothingItem item1 = new ClothingItem("Camisa", 25.99, 'M');
     	if (item1 != null) {
@@ -132,5 +195,8 @@ public class Main {
     	}
     	
     	TestSalesRegister.checkSalesRegister();
+    	
+    	TestLinkedCart.checkLinkedCart();
+    	TestShoppingRegister.checkShoppingRegister();
     }
 }
