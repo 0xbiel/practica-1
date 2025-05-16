@@ -1,4 +1,4 @@
-# Prácticas de Programación - UPV
+# Prácticas de Programación - UPV (1 y 3)
 
 Este repositorio contiene la implementación de las Prácticas 1 y 3 de la asignatura de Programación de la Universitat Politècnica de València (UPV).
 
