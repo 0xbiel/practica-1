@@ -76,10 +76,10 @@ public class ShoppingRegister {
     		.append(clothing.getSize()).append("\t")
     		.append(clothing.getPrice()).append("€\t\t")
     		.append(ci.getUnits()).append("\t\t")
-    		.append(cost).append("€\n");
+    		.append(String.format("%.2f", cost)).append("€\n");
     		cart.remove(0);
     	}
-    	sb.append("\nEl costo total del pedido es: " + totalPrice + "€");
+    	sb.append("\nEl coste total del pedido es: " + String.format("%.2f", totalPrice) + "€");
     	System.out.println(sb);
     }
     
@@ -101,9 +101,9 @@ public class ShoppingRegister {
     		.append(clothing.getSize()).append("\t")
     		.append(clothing.getPrice()).append("€\t\t")
     		.append(ci.getUnits()).append("\t\t")
-    		.append(cost).append("€\n");
+    		.append(String.format("%.2f", cost)).append("€\n");
     	}
-    	sb.append("\nEl coste total del pedido es: " + totalPrice + "€");
+    	sb.append("\nEl coste total del pedido es: " + String.format("%.2f", totalPrice) + "€");
     	System.out.println(sb);
     }
 }

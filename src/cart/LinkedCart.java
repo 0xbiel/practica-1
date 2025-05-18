@@ -24,17 +24,14 @@ public class LinkedCart {
 		}
 		CartItemNode temp = first;
 		int i = 0;
-		do {
-			if (temp == null) {
-				return -1;
-			}
+		while (temp != null && temp.getData() != null ) {
 			ClothingItem ci = temp.getData().getClothingItem();
 			if (ci.getName().equals(name) && ci.getSize() == size) {
 				return i;
 			}
 			i++;
 			temp = temp.getNext();
-		} while (temp.getData() != null);
+		} 
 		
 		return -1;
 	}
